@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/background.jpg'); /* Path to the image in the static folder */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent background */
+            width: 100%;
+            padding: 10px 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .form-btn {
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Flash messages section */
+        .flash-messages {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            color: #fff;
+            background-color: #4CAF50; /* Default success color */
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash-messages.error {
+            background-color: #f44336; /* Error color */
+        }
+    </style>
+</head>
+<body>
+    <header>Attendance System</header>
+    <div class="container">
+
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-messages {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h1>Welcome!</h1>
+        <p>Click the button below to start recording attendance.</p>
+        <a href="/start-attendance" class="btn">Record Attendance</a>
+        <p>New student? Register below:</p>
+
+        <!-- New Registration Form -->
+        <div class="form-container">
+            <form action="/register" method="POST" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="Student Name" required><br>
+                <input type="text" name="student_id" placeholder="Student ID" required><br>
+                <input type="file" name="file" accept="image/*" required><br>
+                <button type="submit" class="form-btn">Register Student</button>
+            </form>
+        </div>
+    </div>
+    <footer>&copy; 2024 Attendance System. All rights reserved.</footer>
+</body>
+</html>       
