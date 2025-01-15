@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/background.jpg'); /* Background image from the static folder */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent background */
+            width: 100%;
+            padding: 10px 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .form-btn {
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .form-btn:hover {
+            background-color: #45a049;
+        }
+
+        .flash-messages {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            color: #fff;
+            background-color: #4CAF50; /* Success color */
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .flash-messages.error {
+            background-color: #f44336; /* Error color */
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <header>Register New Student</header>
+    <div class="container">
+
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-messages {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h1>Register New Student</h1>
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <label for="name">Student Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter student name" required><br>
+
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" placeholder="Enter student ID" required><br>
+
+            <label for="file">Upload Student Photo:</label>
+            <input type="file" id="file" name="file" accept="image/*" required><br>
+
+            <button type="submit" class="form-btn">Register</button>
+        </form>
+        <br>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
